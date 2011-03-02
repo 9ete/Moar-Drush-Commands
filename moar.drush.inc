@@ -1,6 +1,4 @@
 <?php
-// $Id: example.drush.inc,v 1.1 2010/03/26 18:48:47 greg1anderson Exp $
-
 /**
  *   Drush command.
  */
