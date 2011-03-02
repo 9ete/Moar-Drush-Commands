@@ -14,7 +14,11 @@ function moar_drush_command() {
   );
   $items['reinstall'] = array(
     // a short description of your command
-    'description' => "Download and Enable Module.",
+    'description' => "Disable, Uninstall, and Re-Enable Module.",
+  );
+  $items['dun'] = array(
+    // a short description of your command
+    'description' => "Disable and Uninstall Module.",
   );
 
   return $items;
@@ -28,7 +32,9 @@ function moar_drush_help($section) {
     case 'drush:den':
       return dt("Downloads and enables modules.");
     case 'drush:reinstall':
-      return dt("Downloads and enables modules.");
+      return dt("Disable, Uninstall, and Re-Enable Modules.");
+    case 'drush:dun':
+      return dt("Disable and Uninstall Module.");
   }
 }
 
@@ -43,6 +49,7 @@ function drush_moar_den() {
     drush_pm_enable($module);
   }
 }
+
 function drush_moar_reinstall() {
   $args = func_get_args();
   //print_r($args);
@@ -50,5 +57,14 @@ function drush_moar_reinstall() {
     drush_pm_disable($module);
     drush_pm_uninstall($module);
     drush_pm_enable($module);
+  }
+}
+
+function drush_moar_dun() {
+  $args = func_get_args();
+  //print_r($args);
+  foreach($args as $id => $module){
+    drush_pm_disable($module);
+    drush_pm_uninstall($module);
   }
 }
