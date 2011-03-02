@@ -23,6 +23,24 @@ function moar_drush_command() {
     // a short description of your command
     'description' => "Disable and Uninstall Module.",
   );
+  $items['site-offline'] = array(
+    // a short description of your command
+    'description' => "Take the site offline.",
+  );
+  $items['soff'] = array(
+    // a short description of your command
+    'description' => "Take the site offline.",
+    'callback' => 'drush_moar_site_offline',
+  );
+  $items['site-online'] = array(
+    // a short description of your command
+    'description' => "Put the site online.",
+  );
+  $items['son'] = array(
+    // a short description of your command
+    'description' => "Put the site online.",
+    'callback' => 'drush_moar_site_online',
+  );
 
   return $items;
 }
@@ -33,12 +51,23 @@ function moar_drush_command() {
 function moar_drush_help($section) {
   switch ($section) {
     case 'drush:den':
-      return dt("Downloads and enables modules.");
+      return dt("Downloads and enables module(s).");
+      break;
     case 'drush:ren':
     case 'drush:reinstall':
-      return dt("Disable, Uninstall, and Re-Enable Modules.");
+      return dt("Disables, Uninstalls, and Re-Enables Module(s).");
+      break;
     case 'drush:dun':
-      return dt("Disable and Uninstall Module.");
+      return dt("Disables and Uninstalls Module(s).");
+      break;
+    case 'drush:soff':
+    case 'drush:site-offline':
+      return dt("Puts the site offline.");
+      break;
+    case 'drush:son':
+    case 'drush:site-online':
+      return dt("Puts the site online.");
+      break;
   }
 }
 
@@ -71,4 +100,15 @@ function drush_moar_dun() {
     drush_pm_disable($module);
     drush_pm_uninstall($module);
   }
+}
+
+function drush_moar_site_offline(){
+  $args = func_get_args();
+  drush_variable_set("site_offline", "1");
+}
+
+function drush_moar_site_online(){
+  $args = func_get_args();
+  //drush_variable_set("site_offline", 1);
+  drush_variable_delete("site_offline");
 }
