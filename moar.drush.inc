@@ -14,6 +14,11 @@ function moar_drush_command() {
     // a short description of your command
     'description' => "Disable, Uninstall, and Re-Enable Module.",
   );
+  $items['ren'] = array(
+    // a short description of your command
+    'description' => "Disable, Uninstall, and Re-Enable Module.",
+    'callback' => 'drush_moar_reinstall',
+  );
   $items['dun'] = array(
     // a short description of your command
     'description' => "Disable and Uninstall Module.",
@@ -29,6 +34,7 @@ function moar_drush_help($section) {
   switch ($section) {
     case 'drush:den':
       return dt("Downloads and enables modules.");
+    case 'drush:ren':
     case 'drush:reinstall':
       return dt("Disable, Uninstall, and Re-Enable Modules.");
     case 'drush:dun':
