@@ -109,6 +109,5 @@ function drush_moar_site_offline(){
 
 function drush_moar_site_online(){
   $args = func_get_args();
-  //drush_variable_set("site_offline", 1);
-  drush_variable_delete("site_offline");
+  drush_variable_set("site_offline", "0");
 }
